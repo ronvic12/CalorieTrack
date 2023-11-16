@@ -4,11 +4,17 @@ const webSocketsServerPort = process.env.PORT || 3000;
 const webSocketServer = require('websocket').server;
 const http = require('http');
 const express = require('express');
+const cors = require('cors'); // for all routers and diff ports
+const bodyParser = require('body-parser');
 const app = express();
 
 // Set up your express app with middleware and routes
 app.use(express.json()); // middleware to parse JSON requests
 
+app.use(cors());
+
+// Middleware to parse JSON in the request body
+app.use(bodyParser.json());
 
 app.post('/users',(req,res) => {
   console.log(req.body)
@@ -16,7 +22,7 @@ app.post('/users',(req,res) => {
 // Spinning the http server and the websocket server.
 const server = http.createServer(app);
 server.listen(webSocketsServerPort);
-console.log('listening on port ' + webSocketsServerPort);
+console.log(`Server is running on http://localhost:${webSocketsServerPort}`);
 
 
 const wsServer = new webSocketServer({
