@@ -3,6 +3,7 @@ require("dotenv").config()
 const webSocketsServerPort = process.env.PORT || 3000;
 const webSocketServer = require('websocket').server;
 const http = require('http');
+const app = express();
 
 // Spinning the http server and the websocket server.
 const server = http.createServer();
@@ -13,6 +14,11 @@ console.log('listening on port ' + webSocketsServerPort);
 const wsServer = new webSocketServer({
   httpServer: server
 });
+
+// fetch api in backend:
+app.post('/users',(req,res) => {
+  // console.log(req.body)
+})
 
 const clients = {};
 
