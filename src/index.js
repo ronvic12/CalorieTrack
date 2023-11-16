@@ -1,34 +1,18 @@
-import  ReactDOM  from "react-dom";
-import React,{Component} from 'react';
-import { w3cwebsocket as W3CWEBSOCKET}  from "websocket";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
 
-const client = new W3CWEBSOCKET('ws://localhost:4000');
-export default class App extends Component {
 
-    onButtonClicked = (value) =>{
-        let messageobj = {
-            type:"message",
-            msg: value
-        }
-        client.send(JSON.stringify(messageobj))
-    }
-    componentDidMount(){
-        client.onopen = () => {
-            console.log('Websocket client connected');
-        };
-        client.onmessage = (message) => {
-            const dataFromserver = JSON.parse(message.data);
-            console.log(message);
-            console.log("got reply! ",dataFromserver);
-        }
-    }
-    render() {
-        return(
-            <div>
-              <button onClick={() => this.onButtonClicked('Hello!')}>Send Inputs</button>  
-            </div>
-        )
-    }
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />}/>
+
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
