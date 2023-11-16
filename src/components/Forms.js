@@ -4,7 +4,6 @@ class WeightForm extends React.Component {
     constructor(props) {
       super(props);
       this.state = {value: ''};
-  
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -14,6 +13,17 @@ class WeightForm extends React.Component {
     handleSubmit(event) {
     console.log(this.state.value)
       event.preventDefault();
+      fetch('https://localhost:4000/users', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+            // Add any other headers as needed
+            },
+            body: JSON.stringify({weight:this.state.value})
+})
+//   .then(response => response.json())
+//   .then(data => console.log(data))
+//   .catch(error => console.error('Fetch error:', error));
     }
   
     render() {

@@ -28,7 +28,7 @@ export default class Home extends Component {
     render() {
         return(
             <div>
-              <button onClick={() => this.onButtonClicked('Hello!')}>Send Inputs</button>  
+              {/* <button onClick={() => this.onButtonClicked('Hello!')}>Send Inputs</button>   */}
               <div>
                   <br></br>
                   <label>Enter data here: </label>
