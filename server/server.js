@@ -29,8 +29,6 @@ const wsServer = new webSocketServer({
   httpServer: server
 });
 
-// fetch api in backend:
-
 
 const clients = {};
 
@@ -61,37 +59,3 @@ wsServer.on('request', function (request) {
     }
   })
 });
-// const express = require('express');
-// const path = require('path');
-// const app = express();
-// const http = require('http');
-// const server = http.createServer(app);
-// const { Server } = require('socket.io');
-// const io = new Server(server);
-// const PORT = process.env.PORT || 3000;
-
-// // Serve the React app
-// // app.use(express.static(path.join(__dirname, '../client/build')));
-// app.use(express.static("public")); // Serve the public folder
-
-// io.on(("connect"),(socket) => {
-
-//     console.log("A user Connected");
-    
-//     socket.on(("disconnect"),() => {
-//         console.log("A user Disconnected");
-        
-//     });
-// });
-
-// server.listen(PORT, () => {
-//     console.log(`Server is running on port ${PORT}`);
-//   });
-// // Your API routes go here...
-
-// // For any other routes, serve the React app
-// // app.get('*', (req, res) => {
-// //   res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-// // });
-
-
