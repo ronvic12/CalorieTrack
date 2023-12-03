@@ -13,7 +13,7 @@ class WeightForm extends React.Component {
     handleSubmit(event) {
     console.log(this.state.value)
       event.preventDefault();
-      fetch('http://localhost:4000/users', {
+      fetch('http://localhost:4000/api/users/usersAuth', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
