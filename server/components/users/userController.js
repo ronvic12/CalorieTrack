@@ -4,5 +4,6 @@ module.exports.userAuth = async(req, res, next) => {
         weight:req.body.weight
     }
 
-     await userService.myFunc(data)
+     let mydata = await userService.myFunc(data);
+     console.log(mydata)
 }
