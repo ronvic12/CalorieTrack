@@ -1,5 +1,8 @@
-
+const userService = require("./userService")
 module.exports.userAuth = async(req, res, next) => {
-    console.log(req.body)
+    const data = {
+        weight:req.body.weight
+    }
 
+     await userService.myFunc(data)
 }

@@ -1,18 +1,35 @@
 var mysql = require('mysql2');
+require('dotenv').config();
 
-var con = mysql.createConnection({
-  host: "127.0.0.1",
-  user: "ronvic12",
-  password: "Lebronvic30!",
-  database: "calorietrack",
-  waitForConnections: true,
-  connectionLimit: 10,
-  maxIdle: 10,
-  idleTimeout: 60000,
-  queueLimit: 0
-});
+class MYSQLConnector{
 
-con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-});
+  get DB_USERNAME () { return "ronvic12" } 
+  get DB_NAME () {return "calorietrack"}
+  get DB_PASSWORD () {return "Lebronvic30!"}
+  get DB_ADDRESS () {return "127.0.0.1"}
+  get DB_POOLSIZE () {return 10}
+  constructor(){
+
+    this.internalPool = mysql.createConnection({
+        host: this.DB_ADDRESS,
+        user: this.DB_USERNAME,
+        password: this.DB_PASSWORD,
+        database: this.DB_NAME,
+        waitForConnections: true,
+        connectionLimit: DB_POOLSIZE,
+        charset:'utf8mb4',
+        queueLimit: 0
+      });
+
+      this.registerThreadCounter()
+  }
+  registerThreadCounter() {
+    this.internalPool.on('connection', (connection) => console.log(`New connection established with server on thread #${connection.threadId}`))
+  }
+  get pool() {
+    return this.internalPool
+  }
+
+}
+
+module.exports = new MySQLConnector();
