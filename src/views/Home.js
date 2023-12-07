@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import { w3cwebsocket as W3CWEBSOCKET}  from "websocket";
 import WeightForm from "./Forms"
+import Register from "./Register"
 const client = new W3CWEBSOCKET('ws://localhost:4000');
 // Use App component for now as a main input of setup
 // Other Component plans: Show Data and authorization. 
@@ -30,10 +31,7 @@ export default class Home extends Component {
             <div>
               {/* <button onClick={() => this.onButtonClicked('Hello!')}>Send Inputs</button>   */}
               <div>
-                  <br></br>
-                  <label>Enter data here: </label>
-                  <br></br>
-              <WeightForm/>
+                <h1>Calorie Track Home</h1>
               </div>
             </div>
             

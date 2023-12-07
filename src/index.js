@@ -1,15 +1,12 @@
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./views/Home";
-export default function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />}/>
-      </Routes>
-    </BrowserRouter>
-  );
-}
-
+import { BrowserRouter} from "react-router-dom";
+import App from './App';
+import React from 'react';
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+root.render(
+  <React.StrictMode>
+  <BrowserRouter>
+  <App />
+  </BrowserRouter>
+  </React.StrictMode>
+);

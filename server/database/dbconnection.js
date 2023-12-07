@@ -3,11 +3,11 @@ require('dotenv').config();
 
 class MySQLConnector{
 
-  get DB_USERNAME () { return "ronvic12" } 
-  get DB_NAME () {return "calorietrack"}
-  get DB_PASSWORD () {return "Lebronvic30!"}
-  get DB_ADDRESS () {return "127.0.0.1"}
-  get DB_POOLSIZE () {return 100}
+  get DB_USERNAME () { return process.env.DB_USERNAME } 
+  get DB_NAME () {return process.env.DB_NAME}
+  get DB_PASSWORD () {return process.env.DB_PASSWORD}
+  get DB_ADDRESS () {return process.env.DB_HOST}
+  get DB_POOLSIZE () {return process.env.DB_POOLSIZE || 100 }
   constructor(){
 
     this.internalPool = mysql.createPool({
@@ -18,7 +18,7 @@ class MySQLConnector{
         waitForConnections: true,
         connectionLimit: this.DB_POOLSIZE,
         charset:'utf8mb4',
-        queueLimit: 250
+        queueLimit:process.env.DB_QUEUELIMIT || 250
       });
 
       this.registerThreadCounter()
