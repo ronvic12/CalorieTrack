@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 function Register() {
+  const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [FirstName, setFirstName] = useState('');
   const [LastName, setLastName] = useState('');
@@ -9,7 +10,7 @@ function Register() {
   const [message, setMessage] = useState('');
 
   const handleRegistration = () => {
-    axios.post('http://localhost:4000/api/auth/RegisterAuth', { FirstName,LastName,username, password })
+    axios.post('http://localhost:4000/api/auth/RegisterAuth', { email,FirstName,LastName,username, password })
       .then((response) => {
         setMessage(response.data.message);
       })
@@ -21,6 +22,10 @@ function Register() {
   return (
     <div className="App">
       <h1>Register</h1>
+      <label>
+        Email:
+        <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+      </label>
       <label>
         First Name:
         <input type="text" value={FirstName} onChange={(e) => setFirstName(e.target.value)} />
