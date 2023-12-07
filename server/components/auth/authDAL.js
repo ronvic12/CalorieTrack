@@ -3,24 +3,20 @@ const bcrypt = require('bcrypt');
 const mysql = require('../../database/dbWrapper');
 
 module.exports = class authDAL{
-    static async registerUser(data) {
+    static async registerUser(newUser,hashedPassword) {
         return new Promise( async(resolve, reject) => {
             try {
                 let connection = await mysql.getConnectionFromPool();
                 connection = await mysql.beginTransaction(connection);
-                // Hash the password
-                const hashedPassword = await bcrypt.hash(password, 12);
-                const newUser = { email, password: hashedPassword };
-                await mysql.createQuery({
-                    query:`INSERT INTO users (weight) VALUES (?)`,
-                    params:[parseInt(data.weight)],
-                    connection})
-
-
+                const insertData = await mysql.createQuery({
+                  query:`INSERT INTO users (username,password,email,first_name,last_name,auth_token) VALUES (?,?,?,?,?,?)`,
+                  params:[newUser.username,newUser.password,newUser.email,newUser.FirstName,newUser.LastName,hashedPassword],
+                  connection})
+                return resolve({message:"Successfully Registered"})
                 
             } catch(err) {
               console.log(err);
-              return reject(err)
+              return reject({error:err,message:"Already used this registration ID"})
             }
           })
     }

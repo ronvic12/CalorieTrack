@@ -9,13 +9,15 @@ function Register() {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
 
+
   const handleRegistration = () => {
     axios.post('http://localhost:4000/api/auth/RegisterAuth', { email,FirstName,LastName,username, password })
       .then((response) => {
-        setMessage(response.data.message);
+        setMessage(response.data);
       })
       .catch((error) => {
-        console.error('Error logging in:', error);
+        console.error('Error logging in:', error.response.data);
+        setMessage(error.response.data);
       });
   };
 
