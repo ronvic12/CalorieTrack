@@ -7,11 +7,12 @@ function Register() {
   const [FirstName, setFirstName] = useState('');
   const [LastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmpassword, setconfirmpassword] = useState('');
   const [message, setMessage] = useState('');
 
 
   const handleRegistration = () => {
-    axios.post('http://localhost:4000/api/auth/RegisterAuth', { email,FirstName,LastName,username, password })
+    axios.post('http://localhost:4000/api/auth/Register', { email,FirstName,LastName,username, password, confirmpassword })
       .then((response) => {
         setMessage(response.data);
       })
@@ -44,6 +45,10 @@ function Register() {
       <label>
         Password:
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      </label>
+      <label>
+        Confirm Password:
+        <input type="password" value={confirmpassword} onChange={(e) => setconfirmpassword(e.target.value)} />
       </label>
       <br />
       <button onClick={handleRegistration}>Submit</button>
