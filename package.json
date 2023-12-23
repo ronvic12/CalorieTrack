@@ -27,7 +27,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "devStart": "node server/server.js",
+    "devStart": "nodemon server/server.js",
     "start": "PORT=1992 react-scripts start"
   },
   "eslintConfig": {

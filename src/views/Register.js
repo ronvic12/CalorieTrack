@@ -14,11 +14,12 @@ function Register() {
   const handleRegistration = () => {
     axios.post('http://localhost:4000/api/auth/Register', { email,FirstName,LastName,username, password, confirmpassword })
       .then((response) => {
-        setMessage(response.data);
+        console.log(response)
+        setMessage(response.data.msg);
       })
       .catch((error) => {
         console.error('Error logging in:', error.response.data);
-        setMessage(error.response.data);
+        setMessage(error.response);
       });
   };
 

@@ -1,5 +1,5 @@
 const {Users} = require('./authModel')
-const {bcrypt }= require('bcrypt')
+const bcrypt = require('bcrypt');
 const {jwt} = require('jsonwebtoken')
 
 
@@ -14,8 +14,9 @@ module.exports.RegisterAuth = async(req, res, next) => {
     }
 
     if(data.password !== data.confirmpassword) return res.status(400).json({msg:'Password and Confirm Password does not match'});
-    const salt = await bcrypt.genSalt();
-    const hashpassword = await bcrypt.hash(data.password,salt);
+    // const salt = await bcrypt.genSalt();
+    console.log(data);
+    const hashpassword = await bcrypt.hash(data.password,10);
     console.log(hashpassword)
     try{  
         await Users.create({

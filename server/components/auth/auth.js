@@ -5,6 +5,6 @@ const {
     RegisterAuth
   } = require('./authController');
   
-  authRouter.post('/RegisterAuth',RegisterAuth)
+  authRouter.post('/Register',RegisterAuth)
 
 module.exports = { authRouter };
