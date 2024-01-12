@@ -1,4 +1,4 @@
-module.exports.checkDuplicateUsernameOrEmail = async (req, res, next) => {
+checkDuplicateUsernameOrEmail = async (req, res, next) => {
     try {
       // Username
       let user = await User.findOne({
@@ -33,3 +33,8 @@ module.exports.checkDuplicateUsernameOrEmail = async (req, res, next) => {
       });
     }
   };
+
+  const verifyRegister = {
+    checkDuplicateUsernameOrEmail
+  };
+  module.exports = verifyRegister;

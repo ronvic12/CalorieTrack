@@ -8,6 +8,7 @@ const cors = require('cors'); // for all routers and diff ports
 const bodyParser = require('body-parser');
 const app = express();
 const { router } = require('./routers/index');
+const cookieSession = require("cookie-session");
 
 // Set up your express app with middleware and routes
 app.use(express.json()); // middleware to parse JSON requests
@@ -20,6 +21,15 @@ app.use(express.urlencoded({
   limit: '50mb',
   parameterLimit: 1000000
 }));
+
+
+app.use(
+  cookieSession({
+    name: "bezkoder-session",
+    keys: ["COOKIE_SECRET"], // should use as secret environment variable
+    httpOnly: true,
+  })
+);
 
 
 
