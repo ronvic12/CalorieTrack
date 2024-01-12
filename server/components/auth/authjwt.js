@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const config = require("../config/auth.config.js");
-
+const db = require('./authModel')
 verifyToken = (req, res, next) => {
     let token = req.session.token;
   
@@ -23,3 +23,9 @@ verifyToken = (req, res, next) => {
          next();
         });
 }
+
+const authjwt = {
+  verifyToken
+}
+
+module.exports = authjwt;

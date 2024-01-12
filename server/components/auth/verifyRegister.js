@@ -1,7 +1,9 @@
-checkDuplicateUsernameOrEmail = async (req, res, next) => {
+const {Users} = require('./authModel');
+
+module.exports.checkDuplicateUsernameOrEmail = async (req, res, next) => {
     try {
       // Username
-      let user = await User.findOne({
+      let user = await Users.findOne({
         where: {
           username: req.body.username
         }
@@ -14,7 +16,7 @@ checkDuplicateUsernameOrEmail = async (req, res, next) => {
       }
   
       // Email
-      user = await User.findOne({
+      user = await Users.findOne({
         where: {
           email: req.body.email
         }
@@ -34,7 +36,4 @@ checkDuplicateUsernameOrEmail = async (req, res, next) => {
     }
   };
 
-  const verifyRegister = {
-    checkDuplicateUsernameOrEmail
-  };
-  module.exports = verifyRegister;
+ 
