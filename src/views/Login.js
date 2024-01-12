@@ -7,7 +7,8 @@ function Login() {
   const [message, setMessage] = useState('');
 
   const navigate = useNavigate();
-  const handleRegistration = () => {
+  const handleLogin = () => {
+    console.log(emailOrUsername,password)
     axios.post('http://localhost:4000/api/auth/Login', { emailOrUsername, password })
       .then((response) => {
         console.log(response)
@@ -33,7 +34,7 @@ function Login() {
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
       </label>
       <br />
-      <button onClick={handleRegistration}>Submit</button>
+      <button onClick={handleLogin}>Submit</button>
       <p>{message}</p>
     </div>
   );

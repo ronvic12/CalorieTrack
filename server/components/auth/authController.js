@@ -1,8 +1,8 @@
 const {Users} = require('./authModel')
 const bcrypt = require('bcrypt');
 const {jwt} = require('jsonwebtoken')
-
-
+const { Op } = require('sequelize');
+const config = require("./auth.config.js");
 module.exports.RegisterAuth = async(req, res, next) => {
     const data = {
         email:req.body.email,
@@ -32,4 +32,51 @@ module.exports.RegisterAuth = async(req, res, next) => {
     }
   
 
+}
+
+module.exports.LoginAuth = async(req,res,next) =>{
+
+    console.log(req.body);
+    const data = {
+        emailOrUsername:req.body.emailOrUsername,
+        password: req.body.password
+    }
+    try{
+    const user = await Users.findOne({
+        where: {
+            [Op.or]: [
+              { username: data.emailOrUsername },
+              { email: data.emailOrUsername },
+            ],
+         },
+        });
+
+        console.log(user)
+
+        if (!user) {
+            return res.status(404).send({ message: "User Not found." });
+          }
+
+        const passwordIsValid = bcrypt.compareSync(data.password,user.password);
+          console.log(passwordIsValid)
+        if (!passwordIsValid) {
+        return res.status(401).send({
+            message: "Invalid Password!",
+        });
+    }
+
+    // need to figure out the token part, since this is very crucial. 
+    console.log(config.secret)
+
+        const payload = { email: user.email }
+        const token = jwt.sign(payload,config.secret);
+        console.log(token)
+        // console.log(req.sesssion) // need to look at tokens. 
+        // req.session.token = token;
+
+        res.status(200).json({msg:"Login Succefully"})
+    }catch(err){
+        res.status(500).send('Error');
+    }
+  
 }
