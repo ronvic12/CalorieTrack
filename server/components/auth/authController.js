@@ -67,10 +67,10 @@ module.exports.LoginAuth = async(req,res,next) =>{
 
     // need to figure out the token part, since this is very crucial. 
     console.log(config.secret)
-
-        const payload = { email: user.email }
-        const token = jwt.sign(payload,config.secret);
-        console.log(token)
+    //  fix this later.
+        // const payload = { email: user.email }
+        // const token = jwt.sign(payload,config.secret);
+        // console.log(token)
         // console.log(req.sesssion) // need to look at tokens. 
         // req.session.token = token;
 
@@ -79,4 +79,18 @@ module.exports.LoginAuth = async(req,res,next) =>{
         res.status(500).send('Error');
     }
   
+}
+
+module.exports.User = async(req,res,next) =>{
+    const user = await Users.findOne({
+        where: {
+          username: req.body.username,
+        },
+     });
+    
+     if (user) {
+        res.json({ user });
+     } else {
+        res.status(404).json({ error: 'User not found' });
+     }
 }

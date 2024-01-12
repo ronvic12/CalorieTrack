@@ -13,7 +13,7 @@ function Login() {
       .then((response) => {
         console.log(response)
         setMessage(response.data.msg);
-        //navigate('/dashboard');
+        navigate('/dashboard');
       })
       .catch((error) => {
         console.error('Error logging in:', error.response.data);

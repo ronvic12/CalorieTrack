@@ -1,15 +1,19 @@
 import { useState } from 'react';
-
+import axios from 'axios';
 export default function Dashboard() {
-  const [count, setCount] = useState(0);
+  const [weight, setWeight] = useState(0);
 
-  function handleClick() {
-    setCount(count + 1);
-  }
+
 
   return (
-    <button onClick={handleClick}>
-      You pressed me {count} times
-    </button>
+    <div className="App">
+    <h1>Welcome</h1>
+    <label>
+     Enter Weight
+      <input type="text" value={weight} onChange={(e) => setWeight(e.target.value)} />
+    </label>
+    <br />
+    <button>Submit</button>
+  </div>
   );
 }
