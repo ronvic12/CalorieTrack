@@ -10,7 +10,7 @@ const NavBar = () => (
             <NavLink  activeclassname = "active" className ="register" to ="/Register">
                 Register
             </NavLink>
-            <NavLink  activeclassname = "active" className ="Login" to ="/Login">
+            <NavLink  activeclassname = "active" className ="Login" to ="/login">
                Login
             </NavLink>
         </nav>
