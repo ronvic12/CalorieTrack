@@ -1,20 +1,15 @@
-import {NavLink} from 'react-router-dom';
-import './NavBar.css';
+import React from 'react';
+import { Navbar, Nav } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const NavBar = () => (
-    <div className= "nav-bar">
-        <nav>
-            <NavLink exact = "true" activeclassname = "active" to ="/">
-                Home
-            </NavLink>
-            <NavLink  activeclassname = "active" className ="register" to ="/Register">
-                Register
-            </NavLink>
-            <NavLink  activeclassname = "active" className ="Login" to ="/login">
-               Login
-            </NavLink>
-        </nav>
-    </div>
+
+    <Navbar bg="dark" variant="dark">
+      <Nav className="mr-auto" style={{ color: '#FFFFFF' }}>
+        <Nav.Link href="/register">Register</Nav.Link>
+        <Nav.Link href="/login">Login</Nav.Link>
+      </Nav>
+    </Navbar>
 )
 
 export default NavBar;
