@@ -26,6 +26,8 @@ module.exports.RegisterAuth = async(req, res, next) => {
             first_name:data.FirstName,
             last_name:data.LastName
         })
+
+        console.log("Registered sucessfull")
      res.status(200).json({msg:"Registered Succefully"})
     }catch(err){
         res.status(400).send('Already used this registration ID');
