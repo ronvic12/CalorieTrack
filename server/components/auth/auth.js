@@ -9,5 +9,5 @@ const {
   
   authRouter.post('/Register',checkDuplicateUsernameOrEmail,RegisterAuth)
   authRouter.post('/Login',LoginAuth)
-  authRouter.post('/User',User)
+  authRouter.get('/User',User)
 module.exports = { authRouter };

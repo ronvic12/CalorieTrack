@@ -92,7 +92,6 @@ function Register() {
           <Col sm={{ span: 10, offset: 2 }}>
           <br/>
             <Button type="submit">
-             
               <FaUser /> Register
             </Button>
           </Col>

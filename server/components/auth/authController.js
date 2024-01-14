@@ -84,15 +84,21 @@ module.exports.LoginAuth = async(req,res,next) =>{
 }
 
 module.exports.User = async(req,res,next) =>{
+    try{
+
+        console.log("Hello user here");
+        
     const user = await Users.findOne({
         where: {
           username: req.body.username,
         },
      });
+    console.log("user name is ",user)
+    //  if (user) {
+    //     res.json({ user:user });
+    //  }
     
-     if (user) {
-        res.json({ user });
-     } else {
-        res.status(404).json({ error: 'User not found' });
-     }
+    }catch(err){
+        res.status(500).send('Error');
+    }
 }
