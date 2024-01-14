@@ -65,7 +65,6 @@ module.exports.LoginAuth = async(req,res,next) =>{
     // need to figure out the token part, since this is very crucial.
     console.log("user here",user.id);
     //  fix this later.
-        console.log(config.secret)
         const token = jwt.sign({ id: user.id },
             config.secret,
             {
@@ -73,10 +72,7 @@ module.exports.LoginAuth = async(req,res,next) =>{
              allowInsecureKeySizes: true,
              expiresIn: 86400, // 24 hours
             });
-        console.log(token)
-        console.log(req);
         req.session.token = token;
-      
         res.status(200).send({msg:"Login Succefully"})
     }catch(err){
         console.log(err)

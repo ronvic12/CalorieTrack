@@ -1,13 +1,24 @@
-const express = require('express');
-const authRouter = express.Router();
+// const express = require('express');
+// const authRouter = express.Router();
 const {checkDuplicateUsernameOrEmail} = require('./verifyRegister')
-const {
-    RegisterAuth,
-    LoginAuth,
-    User
-  } = require('./authController');
-  
-  authRouter.post('/Register',checkDuplicateUsernameOrEmail,RegisterAuth)
-  authRouter.post('/Login',LoginAuth)
-  authRouter.get('/User',User)
-module.exports = { authRouter };
+const {RegisterAuth,LoginAuth,User} = require('./authController');
+
+
+module.exports =function(app) {
+  app.use(function(req, res, next) {
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, Content-Type, Accept"
+    );
+    next();
+  });
+
+
+  app.post('/api/auth/Register',checkDuplicateUsernameOrEmail,RegisterAuth)
+  app.post('/api/auth/Login',LoginAuth)
+  app.get('/api/auth/User',User)
+
+}
+ 
+
+
