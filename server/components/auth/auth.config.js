@@ -1,3 +1,3 @@
 module.exports = {
-    secret: "calorie-secret-key"
-  };
+  secret: "bezkoder-secret-key"
+};

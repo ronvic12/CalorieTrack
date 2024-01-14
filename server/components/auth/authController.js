@@ -1,6 +1,6 @@
 const {Users} = require('./authModel')
 const bcrypt = require('bcrypt');
-const {jwt} = require('jsonwebtoken')
+var jwt = require('jsonwebtoken') // it has to become a var not const so it can access all jswon webtoken files
 const { Op } = require('sequelize');
 const config = require("./auth.config.js");
 module.exports.RegisterAuth = async(req, res, next) => {
@@ -26,8 +26,6 @@ module.exports.RegisterAuth = async(req, res, next) => {
             first_name:data.FirstName,
             last_name:data.LastName
         })
-
-        console.log("Registered sucessfull")
      res.status(200).json({msg:"Registered Succefully"})
     }catch(err){
         res.status(400).send('Already used this registration ID');
@@ -38,7 +36,6 @@ module.exports.RegisterAuth = async(req, res, next) => {
 
 module.exports.LoginAuth = async(req,res,next) =>{
 
-    console.log(req.body);
     const data = {
         emailOrUsername:req.body.emailOrUsername,
         password: req.body.password
@@ -60,24 +57,29 @@ module.exports.LoginAuth = async(req,res,next) =>{
           }
 
         const passwordIsValid = bcrypt.compareSync(data.password,user.password);
-          console.log(passwordIsValid)
         if (!passwordIsValid) {
         return res.status(401).send({
             message: "Invalid Password!",
         });
     }
-
-    // need to figure out the token part, since this is very crucial. 
-    console.log(config.secret)
+    // need to figure out the token part, since this is very crucial.
+    console.log("user here",user.id);
     //  fix this later.
-        // const payload = { email: user.email }
-        // const token = jwt.sign(payload,config.secret);
-        // console.log(token)
-        // console.log(req.sesssion) // need to look at tokens. 
-        // req.session.token = token;
-
-        res.status(200).json({msg:"Login Succefully"})
+        console.log(config.secret)
+        const token = jwt.sign({ id: user.id },
+            config.secret,
+            {
+             algorithm: 'HS256',
+             allowInsecureKeySizes: true,
+             expiresIn: 86400, // 24 hours
+            });
+        console.log(token)
+        console.log(req);
+        req.session.token = token;
+      
+        res.status(200).send({msg:"Login Succefully"})
     }catch(err){
+        console.log(err)
         res.status(500).send('Error');
     }
   
@@ -87,7 +89,7 @@ module.exports.User = async(req,res,next) =>{
     try{
 
         console.log("Hello user here");
-        
+
     const user = await Users.findOne({
         where: {
           username: req.body.username,
