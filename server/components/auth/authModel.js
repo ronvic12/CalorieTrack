@@ -25,10 +25,21 @@ const Users = db.define('users',{
 },{
     freezeTableName:true
 });
+
+const RefreshToken = db.define("refreshToken", {
+    token: {
+      type: DataTypes.STRING,
+    },
+    expiryDate: {
+      type: DataTypes.DATE,
+    },
+  });
+
+
 (async () =>{
     await db.sync();
 }) ();
 
 
 
-module.exports = { Users};
+module.exports = { Users,RefreshToken};

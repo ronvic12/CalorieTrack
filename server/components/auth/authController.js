@@ -3,7 +3,8 @@ const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken') // it has to become a var not const so it can access all jswon webtoken files
 const { Op } = require('sequelize');
 const config = require("./auth.config.js");
-const {RefreshToken} = require("./refreshTokenModel");
+const {RefreshTokenModel} = require("./refreshTokenModel");
+
 
 
 module.exports.RegisterAuth = async(req, res, next) => {
@@ -69,14 +70,15 @@ module.exports.LoginAuth = async(req,res,next) =>{
              expiresIn: config.jwtExpiration, // 24 hours
             });
 
-        let refreshToken = await RefreshToken.createToken(user);
+       // let refreshToken = await RefreshTokenModel.createToken(user);
+       //refreshToken: refreshToken
         req.session.token = token;
         res.status(200).send({
             msg:"Login Succefully",
             id:user.id,
             username:user.email,
             accessToken: token,
-            refreshToken: refreshToken
+            
         })
     }catch(err){
         console.log(err)
@@ -87,8 +89,6 @@ module.exports.LoginAuth = async(req,res,next) =>{
 
 module.exports.User = async(req,res,next) =>{
     try{
-        console.log("Hello user here");
-
     const user = await Users.findOne({
         where: {
           username: req.body.username,

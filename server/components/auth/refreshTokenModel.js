@@ -1,39 +1,26 @@
 const config = require("./auth.config");
 const { v4: uuidv4 } = require("uuid");
-const {DataTypes} = Sequelize;
-const {db} = require('../../database/dbconnection.js');
+const {RefreshToken} = require("./authModel")
 
-module.exports = () =>{
-    
-const RefreshToken = db.define("refreshToken", {
-    token: {
-      type: DataTypes.STRING,
-    },
-    expiryDate: {
-      type: DataTypes.DATE,
-    },
-  });
-
-  RefreshToken.createToken = async function (user) {
+module.exports.createToken = async function (user) {
     let expiredAt = new Date();
 
     expiredAt.setSeconds(expiredAt.getSeconds() + config.jwtRefreshExpiration);
 
     let _token = uuidv4();
 
-    let refreshToken = await this.create({
+    let refreshToken = await RefreshToken.create({
       token: _token,
       userId: user.id,
       expiryDate: expiredAt.getTime(),
     });
 
+    console.log("Refresh token is ",refreshToken)
     return refreshToken.token;
   };
 
-  RefreshToken.verifyExpiration = (token) => {
+module.exports.verifyExpiration = (token) => {
     return token.expiryDate.getTime() < new Date().getTime();
   };
 
-  return RefreshToken;
 
-}

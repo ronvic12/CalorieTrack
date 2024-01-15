@@ -1,7 +1,7 @@
 // const express = require('express');
 // const authRouter = express.Router();
 const {checkDuplicateUsernameOrEmail} = require('./verifyRegister')
-const {RegisterAuth,LoginAuth,User} = require('./authController');
+const {RegisterAuth,LoginAuth,User,refreshToken} = require('./authController');
 
 
 module.exports =function(app) {
@@ -16,6 +16,7 @@ module.exports =function(app) {
 
   app.post('/api/auth/Register',checkDuplicateUsernameOrEmail,RegisterAuth)
   app.post('/api/auth/Login',LoginAuth)
+  app.post("/api/auth/refreshtoken", refreshToken);
   app.get('/api/auth/User',User)
 
 }

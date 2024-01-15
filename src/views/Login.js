@@ -39,7 +39,7 @@ function Login() {
                 type="text" 
                 placeholder="Enter email or username" 
                 value={emailOrUsername} 
-                onChange={(e) => setEmailOrUsername(e.target.value)} 
+                onChange={(e) => setEmailOrUsername(e.target.value)}
               />
             </Form.Group>
 
