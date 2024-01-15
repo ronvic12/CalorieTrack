@@ -1,6 +1,16 @@
 var jwt = require("jsonwebtoken");
 const config = require("./auth.config.js");
-const db = require('./authModel')
+const db = require('./authModel');
+const { TokenExpiredError } = jwt;
+
+const catchError = (err, res) => {
+  if (err instanceof TokenExpiredError) {
+    return res.status(401).send({ message: "Unauthorized! Access Token was expired!" });
+  }
+
+  return res.sendStatus(401).send({ message: "Unauthorized!" });
+}
+
 verifyToken = (req, res, next) => {
     let token = req.session.token;
   
