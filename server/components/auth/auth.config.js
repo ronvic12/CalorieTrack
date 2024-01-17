@@ -1,5 +1,5 @@
 module.exports = {
   secret: "calorie-secret-key",
-  jwtExpiration: 60,          // 1 minute
+  jwtExpiration: "10m",          // 1 minute
   jwtRefreshExpiration: 120,  // 2 minutes
 };

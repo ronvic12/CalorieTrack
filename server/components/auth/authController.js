@@ -62,22 +62,12 @@ module.exports.LoginAuth = async(req,res,next) =>{
           const accessToken = createTokens(user)
           res.cookie("access-Token",accessToken,{
             maxAge:60*60*24*30*1000,
-            httpOnly: true
+            httpOnly: true // for security where it only shows in http not https. 
           })
           res.json("Login Successfully")
       }
 
-        
 
-       // let refreshToken = await RefreshTokenModel.createToken(user);
-       //refreshToken: refreshToken
-        // req.session.token = token;
-        // res.status(200).send({
-        //     msg:"Login Succefully",
-        //     id:user.id,
-        //     username:user.email
-            
-        // })
     }catch(err){
         console.log(err)
         res.status(500).send('Error');
@@ -85,8 +75,13 @@ module.exports.LoginAuth = async(req,res,next) =>{
   
 }
 
-module.exports.Profile = async(req,res,next) =>{
-    try{res.json('Profile')}catch(err){console.log(err)}
+module.exports.Profile = async(req,res) =>{
+    try{
+      res.json("profile")
+    }catch(err){
+      console.log(err)
+    
+    }
 }
 
 

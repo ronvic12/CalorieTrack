@@ -7,7 +7,7 @@ const {validateToken} = require('./JWT')
 
 authRouter.post('/Register',checkDuplicateUsernameOrEmail,RegisterAuth);
 authRouter.post('/Login',LoginAuth);
-authRouter.get('/profile',validateToken,Profile);
+authRouter.post('/profile',validateToken,Profile);
 // authRouter.post('/api/auth/Login',LoginAuth);
 // authRouter.get('/api/auth/Profile',Profile);
 // authRouter.post("/api/auth/refreshtoken", refreshToken);

@@ -17,7 +17,7 @@ function Login() {
       .then((response) => {
         console.log(response)
         setMessage(response.data.msg);
-        navigate('/dashboard');
+        navigate('/profile');
       })
       .catch((error) => {
         console.error('Error logging in:', error.response.data.message);
