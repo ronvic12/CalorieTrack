@@ -89,11 +89,13 @@ module.exports.LoginAuth = async(req,res,next) =>{
 
 module.exports.User = async(req,res,next) =>{
     try{
-    const user = await Users.findOne({
+    const users = await Users.findOne({
         where: {
           username: req.body.username,
         },
-     });    
+     });   
+     console.log(users)
+     res.send(user) 
     }catch(err){
         res.status(500).send('Error');
     }

@@ -8,6 +8,7 @@ const NavBar = () => (
       <Nav className="mr-auto" style={{ color: '#FFFFFF' }}>
         <Nav.Link href="/register">Register</Nav.Link>
         <Nav.Link href="/login">Login</Nav.Link>
+        <Nav.Link href="/profile">Profile</Nav.Link>
       </Nav>
     </Navbar>
 )

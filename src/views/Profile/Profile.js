@@ -1,7 +1,7 @@
 import { useState,useEffect } from 'react';
 import axios from 'axios';
-import NavBar from './NavBar/NavBar';
-export default function Dashboard() {
+
+export default function Profile() {
   const [weight, setWeight] = useState(0);
   const [data,setdata] = useState(null)
 
@@ -19,8 +19,8 @@ export default function Dashboard() {
 
   return (
     <div className="App">
-      <NavBar></NavBar>
-    {data ? <h1>Welcome{data}</h1>:<h1>Loading...</h1>}
+
+    {data ? <h1>Welcome{data.message}</h1>:<h1>Loading...</h1>}
     <label>
      Enter Weight
       <input type="text" value={weight} onChange={(e) => setWeight(e.target.value)} />

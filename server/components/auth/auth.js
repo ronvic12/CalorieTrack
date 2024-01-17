@@ -17,7 +17,7 @@ module.exports =function(app) {
   app.post('/api/auth/Register',checkDuplicateUsernameOrEmail,RegisterAuth)
   app.post('/api/auth/Login',LoginAuth)
   app.post("/api/auth/refreshtoken", refreshToken);
-  app.get('/api/auth/User',User)
+  app.post('/api/auth/User',User);
 
 }
  
