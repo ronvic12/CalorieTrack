@@ -15,9 +15,9 @@ function Register() {
   const [message, setMessage] = useState('');
 
   const navigate = useNavigate();
-  const handleRegistration = (e) => {
+  const handleRegistration = async(e) => {
     e.preventDefault(); // this prevents default page when submitting
-    axios.post('http://localhost:4000/api/auth/Register', { FirstName,LastName,email,username, password, confirmpassword })
+    await axios.post('http://localhost:4000/api/auth/Register', { FirstName,LastName,email,username, password, confirmpassword })
       .then((response) => {
         console.log(response)
         setMessage(response.data.msg);

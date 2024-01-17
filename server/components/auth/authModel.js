@@ -5,19 +5,26 @@ const { v4: uuidv4 } = require("uuid");
 
 const Users = db.define('users',{
     username:{
-        type:DataTypes.STRING
+        type:DataTypes.STRING,
+        allowNull:false,
+        unique:true,
     },
     email:{
-        type:DataTypes.STRING
+        type:DataTypes.STRING,
+        allowNull:false,
+        unique:true,
     },
     password:{
-        type:DataTypes.STRING
+        type:DataTypes.STRING,
+        allowNull:false,
     },
     first_name:{
-        type:DataTypes.STRING
+        type:DataTypes.STRING,
+        allowNull:false,
     },
     last_name: {
-        type:DataTypes.STRING
+        type:DataTypes.STRING,
+        allowNull:false,
     },
     refresh_token:{
         type:DataTypes.TEXT

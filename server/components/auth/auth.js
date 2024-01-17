@@ -1,25 +1,28 @@
-// const express = require('express');
-// const authRouter = express.Router();
+const express = require('express');
+const authRouter = express.Router();
 const {checkDuplicateUsernameOrEmail} = require('./verifyRegister')
-const {RegisterAuth,LoginAuth,User,refreshToken} = require('./authController');
+const {RegisterAuth,LoginAuth,User,refreshToken,Profile} = require('./authController');
+const {validateToken} = require('./JWT')
 
 
-module.exports =function(app) {
-  app.use(function(req, res, next) {
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, Content-Type, Accept"
-    );
-    next();
-  });
+authRouter.post('/Register',checkDuplicateUsernameOrEmail,RegisterAuth);
+authRouter.post('/Login',LoginAuth);
+authRouter.get('/profile',validateToken,Profile);
+// authRouter.post('/api/auth/Login',LoginAuth);
+// authRouter.get('/api/auth/Profile',Profile);
+// authRouter.post("/api/auth/refreshtoken", refreshToken);
+// authRouter.post('/api/auth/User',User);
 
-
-  app.post('/api/auth/Register',checkDuplicateUsernameOrEmail,RegisterAuth)
-  app.post('/api/auth/Login',LoginAuth)
-  app.post("/api/auth/refreshtoken", refreshToken);
-  app.post('/api/auth/User',User);
-
-}
+module.exports = {authRouter}
  
 
 
+
+
+// app.use(function(req, res, next) {
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, Content-Type, Accept"
+//   );
+//   next();
+// });
